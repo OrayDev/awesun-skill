@@ -93,52 +93,13 @@ cp -r awesun-remote-control %USERPROFILE%\.openclaw\skills\
 
 2. 发信息让OpenClaw自行加载Skill `awesun-remote-control` 确认安装成功，若无法成功尝试重启gateway。
 
-**手动安装：**
-1. 找到你的编辑器配置目录：
-   - Claude Code: `%APPDATA%\Claude Code\skills`
-   - Open Code: `%APPDATA%\Open Code\skills`
-2. 将 `awesun-remote-control` 文件夹复制到 `skills` 目录下
-3. 重启编辑器
-
 ## 功能特性
 
-本 skill 提供远程控制工具，分为以下类别：
-
-### 🖥️ 设备管理
-- `device_search`: 搜索设备
-- `device_info`: 查看设备详情  
-- `device_add`: 添加设备
-- `device_remove`: 删除设备
-- `device_update`: 更新设备信息
-
-### 🔗 远程连接
-- `control_connect`: 建立远程连接
-- `control_disconnect`: 断开连接
-- `control_sessions`: 查看活跃会话
-
-### 🖱️ 桌面控制
-- `desktop_click_mouse`: 鼠标点击
-- `desktop_move_mouse`: 鼠标移动
-- `desktop_drag_mouse`: 鼠标拖拽
-- `desktop_scroll_mouse`: 鼠标滚动
-- `desktop_typing_text`: 输入文本
-- `desktop_typing_keys`: 组合键输入
-- `desktop_press_keys`: 按键控制
-- `desktop_paste_text`: 粘贴文本
-
-### ⚡ 系统操作
-- `control_command`: 执行远程命令
-- `control_screenshot`: 远程截图
-- `desktop_waiting`: 等待操作
-- `device_shutdown`: 关机
-- `device_wakeup`: 远程开机
-
-### 🌐 网络工具
-- `control_portforward`: 端口转发
+本 skill 基于向日葵MCP提供远程控制工具，功能与向日葵MCP一致，详见：[awesun-mcp](https://github.com/OrayDev/awesun-mcp) - 向日葵 MCP 服务
 
 ## 使用示例
 
-安装完成后，你可以在编辑器中这样使用：
+安装完成后，你可以在对话框中这样使用：
 
 ```
 帮我连接到办公室的电脑，然后截个图看看桌面状态
