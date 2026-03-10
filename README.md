@@ -4,6 +4,8 @@
 
 ***⚠️配置Skill前请安装符合版本向日葵客户端，并启用向日葵MCP服务，详见：[https://github.com/OrayDev/awesun-mcp](https://github.com/OrayDev/awesun-mcp)***
 
+***⚠️本Skill依赖Python执行环境，建议版本 3.7以上***
+
 ## 使用帮助
 
 1. 安装向日葵客户端(16.3.2以上)
@@ -15,47 +17,83 @@
 ```bash
 # 克隆项目
 git clone https://github.com/OrayDev/awesun-skill.git
+
 cd awesun-skill
 
-# 根据你使用的编辑器选择对应的安装脚本
-
-# 为 Claude Code 安装
-./scripts/install-claude-code.sh
-
-# 为 Open Code 安装  
-./scripts/install-opencode.sh
-
-# 为 🦞OpenClaw 安装
-./scripts/install-openclaw.sh
+# 安装python mcp依赖
+pip install mcp
 ```
 
-### Windows 用户
+开启向日葵客户端上的MCP服务，显示服务配置如下：
 
-```powershell
-# 以管理员身份运行 PowerShell，或在普通用户下运行
-# （如果是首次运行 PowerShell 脚本，可能需要设置执行策略）
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-# 克隆项目
-git clone https://github.com/OrayDev/awesun-skill.git
-cd awesun-skill
-
-# 根据你使用的编辑器选择对应的 PowerShell 脚本
-
-# 为 Claude Code 安装
-.\scripts\install-claude-code.ps1
-
-# 为 Open Code 安装
-.\scripts\install-opencode.ps1
-
-# 强制覆盖安装（可选）
-.\scripts\install-claude-code.ps1 -Force
-
-# 查看帮助
-.\scripts\install-claude-code.ps1 -Help
+```json
+{
+  "mcpServers": {
+    "awesun-mcp-server": {
+      "command": "/Applications/AweSun.app/Contents/Helpers/awesun-mcp-server",
+      "env": {
+        "AWESUN_API_URL": "http://127.0.0.1:8908",
+        "AWESUN_API_TOKEN": "xxxxxxxxxxx"
+      }
+    }
+  }
+}
 ```
 
-**手动安装（如果脚本无法运行）：**
+编辑本项目下 `awesun-skill/awesun-remote-control/mcp-config.json` 
+
+1. 把 `/Applications/AweSun.app/Contents/Helpers/awesun-mcp-server`(这是Mac的默认值) 替换成MCP服务配置的command，即上面的 `C:\Program Files\Oray\Awesun\awesun-mcp-server`
+2. 替换 `your-mcp-server-token` 为配置中 AWESUN_API_TOKEN，即上面的 `xxxxxxxxxx`
+
+即完成Skill配置，可安装到AI工具使用
+
+### Skill安装
+
+#### Claude code
+
+1. 把 `awesun-remote-control` 复制到对应目录
+
+```bash
+# 全局安装
+cp -r awesun-remote-control ~/.claude/skills/
+
+# 安装到指定workspace（特定项目生效）,下面用 /your/path/of/workspace 为示例
+mkdir -p /your/path/of/workspace/.claude/skills # 确保存在可跳过
+cp -r awesun-remote-control /your/path/of/workspace/.claude/skills
+```
+
+2. 重启Claude code，输入 `/skills` 确认skill是否安装正确
+
+#### Opencode
+
+1. 把 `awesun-remote-control` 复制到对应目录
+
+```bash
+# 全局安装
+cp -r awesun-remote-control ~/.opencode/skills/
+
+# 安装到指定workspace（特定项目生效）,下面用 /your/path/of/workspace 为示例
+mkdir -p /your/path/of/workspace/.opencode/skills # 确保存在可跳过
+cp -r awesun-remote-control /your/path/of/workspace/.opencode/skills
+```
+
+2. 重启opencode，，输入 `/skills` 确认skill是否安装正确
+
+#### 🦞OpenClaw
+
+1. 把 `awesun-remote-control` 复制到OpenClaw配置目录
+
+```bash
+# Linux/Mac 默认路径
+cp -r awesun-remote-control ~/.openclaw/skills/
+
+# Windows
+cp -r awesun-remote-control %USERPROFILE%\.openclaw\skills\
+```
+
+2. 发信息让OpenClaw自行加载Skill `awesun-remote-control` 确认安装成功，若无法成功尝试重启gateway。
+
+**手动安装：**
 1. 找到你的编辑器配置目录：
    - Claude Code: `%APPDATA%\Claude Code\skills`
    - Open Code: `%APPDATA%\Open Code\skills`
@@ -112,17 +150,13 @@ cd awesun-skill
 关闭远程连接
 ```
 
-## 安装脚本详情
-
-详细的安装说明和故障排除，请查看：[scripts/README.md](scripts/README.md)
-
 ## 注意事项
 
 - 使用前请确保向日葵客户端已启动并登录
 - 建议配合 [screenshot-ui-locator](http://github.com/OrayDev/screenshot-ui-locator) Skill 使用以提供更好的桌面操作体验
-- 远程操作时请注意网络延迟，适当使用 `desktop_waiting` 工具
 
 ## 相关项目
 
 - [awesun-mcp](https://github.com/OrayDev/awesun-mcp) - 向日葵 MCP 服务
 - [screenshot-ui-locator](http://github.com/OrayDev/screenshot-ui-locator) - 截图辅助 GUI 理解 Skill
+- [awesun-usecase-skill-example](https://github.com/OrayDev/awesun-usecase-skill-example) - 通过向日葵 MCP 实现的用例场景
