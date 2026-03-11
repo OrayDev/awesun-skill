@@ -119,5 +119,5 @@ cp -r awesun-remote-control %USERPROFILE%\.openclaw\skills\
 ## 相关项目
 
 - [awesun-mcp](https://github.com/OrayDev/awesun-mcp) - 向日葵 MCP 服务
-- [screenshot-ui-locator](http://github.com/OrayDev/screenshot-ui-locator) - 截图辅助 GUI 理解 Skill
+- [awesun-ui-locator](https://github.com/OrayDev/awesun-ui-locator) - 截图辅助 GUI 理解 Skill
 - [awesun-usecase-skill-example](https://github.com/OrayDev/awesun-usecase-skill-example) - 通过向日葵 MCP 实现的用例场景
