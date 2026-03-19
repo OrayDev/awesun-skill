@@ -30,6 +30,12 @@ class MCPExecutor:
         """Connect to MCP server."""
         from contextlib import AsyncExitStack
 
+        if "command" not in server_config or not server_config["command"]:
+            raise ValueError("mcp-config.json 缺少必填字段：command")
+            
+        if "env" not in server_config or not server_config["env"]:
+            raise ValueError("mcp-config.json 缺少必填字段：env")
+
         server_params = StdioServerParameters(
             command=self.server_config["command"],
             args=self.server_config.get("args", []),
@@ -115,7 +121,9 @@ async def main():
         print("Error: pip install mcp", file=sys.stderr)
         sys.exit(1)
 
-    executor = MCPExecutor(config)
+
+    server_config = config.get("mcpServers", {}).get("awesun-mcp-server", config)
+    executor = MCPExecutor(server_config)
 
     try:
         if args.list:
