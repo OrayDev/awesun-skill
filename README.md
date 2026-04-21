@@ -1,4 +1,4 @@
-# 向日葵(Awesun) Skill
+# 向日葵(AweSun) Skill
 
 基于[向日葵MCP服务](https://github.com/OrayDev/awesun-mcp)，为Claude Code、Open Code、🦞OpenClaw等支持Skills的AI Agent提供渐进式披露的工具调用。
 
@@ -8,7 +8,7 @@
 
 ## 使用帮助
 
-1. 安装向日葵客户端(16.3.2以上)
+1. 安装向日葵个人版客户端(V16.3.0.29530及以上)
 
 2. 启用[向日葵MCP服务](https://github.com/OrayDev/awesun-mcp])，并切换到 stdio 方式（默认）
 
@@ -17,14 +17,9 @@
 ```bash
 # 克隆项目
 git clone https://github.com/OrayDev/awesun-skill.git
-
-cd awesun-skill
-
-# 安装python mcp依赖
-pip install mcp
 ```
 
-开启向日葵客户端上的MCP服务，显示服务配置如下：
+开启向日葵客户端上的MCP服务，选择***Stdio模式***，并切换配置为：***其他（通用配置）***，显示服务配置如下：
 
 ```json
 {
@@ -39,59 +34,53 @@ pip install mcp
   }
 }
 ```
-
-编辑本项目下 `awesun-skill/awesun-remote-control/mcp-config.json` 
-
-1. 把 `/Applications/AweSun.app/Contents/Helpers/awesun-mcp-server`(这是Mac的默认值) 替换成MCP服务配置的command，即上面的 `C:\Program Files\Oray\Awesun\awesun-mcp-server`
-2. 替换 `your-mcp-server-token` 为配置中 AWESUN_API_TOKEN，即上面的 `xxxxxxxxxx`
-
-即完成Skill配置，可安装到AI工具使用
+替换本项目下 `awesun-skill/scripts/mcp.json` 的内容，即完成Skill配置，可安装到AI工具使用。
 
 ### Skill安装
 
 #### Claude code
 
-1. 把 `awesun-remote-control` 复制到对应目录
+1. 把 `awesun-skill` 复制到对应目录
 
 ```bash
 # 全局安装
-cp -r awesun-remote-control ~/.claude/skills/
+cp -r awesun-skill ~/.claude/skills/
 
 # 安装到指定workspace（特定项目生效）,下面用 /your/path/of/workspace 为示例
 mkdir -p /your/path/of/workspace/.claude/skills # 确保存在可跳过
-cp -r awesun-remote-control /your/path/of/workspace/.claude/skills
+cp -r awesun-skill /your/path/of/workspace/.claude/skills
 ```
 
 2. 重启Claude code，输入 `/skills` 确认skill是否安装正确
 
 #### Opencode
 
-1. 把 `awesun-remote-control` 复制到对应目录
+1. 把 `awesun-skill` 复制到对应目录
 
 ```bash
 # 全局安装
-cp -r awesun-remote-control ~/.opencode/skills/
+cp -r awesun-skill ~/.opencode/skills/
 
 # 安装到指定workspace（特定项目生效）,下面用 /your/path/of/workspace 为示例
 mkdir -p /your/path/of/workspace/.opencode/skills # 确保存在可跳过
-cp -r awesun-remote-control /your/path/of/workspace/.opencode/skills
+cp -r awesun-skill /your/path/of/workspace/.opencode/skills
 ```
 
 2. 重启opencode，，输入 `/skills` 确认skill是否安装正确
 
 #### 🦞OpenClaw
 
-1. 把 `awesun-remote-control` 复制到OpenClaw配置目录
+1. 把 `awesun-skill` 复制到OpenClaw配置目录
 
 ```bash
 # Linux/Mac 默认路径
-cp -r awesun-remote-control ~/.openclaw/skills/
+cp -r awesun-skill ~/.openclaw/skills/
 
 # Windows
-cp -r awesun-remote-control %USERPROFILE%\.openclaw\skills\
+cp -r awesun-skill %USERPROFILE%\.openclaw\skills\
 ```
 
-2. 发信息让OpenClaw自行加载Skill `awesun-remote-control` 确认安装成功，若无法成功尝试重启gateway。
+2. 发信息让OpenClaw自行加载Skill `awesun-skill` 确认安装成功，若无法成功尝试重启gateway。
 
 ## 功能特性
 
@@ -113,11 +102,9 @@ cp -r awesun-remote-control %USERPROFILE%\.openclaw\skills\
 
 ## 注意事项
 
-- 使用前请确保向日葵客户端已启动并登录
-- 建议配合 [screenshot-ui-locator](http://github.com/OrayDev/screenshot-ui-locator) Skill 使用以提供更好的桌面操作体验
+- 使用前请确保向日葵客户端已启动并登录，并在MCP菜单中开启MCP服务器。
 
 ## 相关项目
 
 - [awesun-mcp](https://github.com/OrayDev/awesun-mcp) - 向日葵 MCP 服务
-- [awesun-ui-locator](https://github.com/OrayDev/awesun-ui-locator) - 截图辅助 GUI 理解 Skill
 - [awesun-usecase-skill-example](https://github.com/OrayDev/awesun-usecase-skill-example) - 通过向日葵 MCP 实现的用例场景
